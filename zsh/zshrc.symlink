@@ -1,0 +1,65 @@
+#------------------------------
+# Functions
+#------------------------------
+# Set MacOS X terminal tab name
+function tabname {
+  printf "\e]1;$1\a"
+}
+
+#------------------------------
+# Aliases
+#------------------------------
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias ..='cd ..'
+
+alias ls='ls -hG'
+alias la='ls -AlhG'
+
+alias pbsort='pbpaste | sort | pbcopy'
+alias ox='open *.xcworkspace || open *.xcodeproj'
+alias fl='bundle exec fastlane'
+
+#------------------------------
+# Variables
+#------------------------------
+export EDITOR="vim"
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$HOME/.rbenv/bin:$PATH"
+
+#------------------------------
+# rbenv
+#------------------------------
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+#------------------------------
+# oh-my-zsh
+#------------------------------
+ZSH=$HOME/.oh-my-zsh
+ZSH_THEME="robbyrussell"
+
+DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_UPDATE="true"
+COMPLETION_WAITING_DOTS="true"
+
+plugins=(git osx ruby brew pod terminalapp git-extras github jira wd fastlane)
+
+source $ZSH/oh-my-zsh.sh
+
+#------------------------------
+# Other
+#------------------------------
+# add some readline keys back
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+
+
+#------------------------------
+# Load local config
+#------------------------------
+if [ -f ~/.zshrc.local ]; then
+	source ~/.zshrc.local
+fi
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
